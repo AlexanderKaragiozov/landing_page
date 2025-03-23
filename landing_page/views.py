@@ -182,3 +182,12 @@ def order_complete(request):
         return response
 
     return redirect("home")
+
+
+def lichni_danni(request):
+    return render(request,'lichni-danni.html')
+
+def biscuits(request):
+    return render(request,'Biscuits.html')
+def tos(request):
+    return render(request,'tos.html')

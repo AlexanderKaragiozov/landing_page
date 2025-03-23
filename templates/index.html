@@ -48,7 +48,7 @@
                             <!-- Remove button with item id -->
                             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-                            <button class="btn btn-danger btn-sm remove-item" data-id={{ item.id }}>Remove</button>
+                            <button style="background: rgba(238,255,205,0)" class="btn btn-danger btn-sm remove-item" data-id={{ item.id }}>🗑️</button>
                         </li>
                     {% empty %}
                         <li class="list-group-item">Няма продукти в кошницата.</li>
@@ -264,6 +264,9 @@
     <!-- Footer -->
     <footer class="py-4 bg-dark text-white text-center w-100">
         <p>&copy; 2025 Свещи от kataleyacandles.eu. Всички права запазени.</p>
+        <a href="{% url 'tos' %}">ОБЩИ УСЛОВИЯ</a>
+        <a href="{% url 'biscuits' %}">БИСКВИТКИ</a>
+        <a href="{% url 'lichni_danni' %}">ЛИЧНИ ДАННИ</a>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
