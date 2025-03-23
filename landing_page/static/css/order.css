@@ -1,0 +1,178 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.announcement {
+    background-color: #6a1b9a;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.hero {
+    background-color: #f8f9fa;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+}
+
+/* Order Form Section */
+#order-form {
+    background-color: #f8f9fa;
+    padding: 50px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10-column grid */
+    gap: 20px;
+    align-items: start;
+}
+
+/* Order Form */
+.order-form {
+    grid-column: span 6;
+    display: grid;
+    gap: 15px;
+    max-width: 800px;
+}
+
+.order-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.order-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.order-form button {
+    background-color: #6a1b9a;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.order-form button:hover {
+    background-color: #ff4081;
+}
+
+/* Upsell Section */
+.upsell-container {
+    grid-column: span 4;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive */
+    gap: 15px;
+    justify-items: center;
+}
+
+/* Smaller cards */
+.upsell-card {
+    background-color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 220px; /* Reduced size */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto; /* Adjust height dynamically */
+}
+
+/* Smaller images */
+.upsell-card img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+/* Ensure descriptions are aligned */
+.upsell-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0px;
+    flex-grow: 1; /* Expands text block */
+}
+
+.upsell-card p {
+    font-size: 0.85rem;
+    color: #555;
+    flex-grow: 1;
+    margin: 0;
+}
+
+/* Button stays aligned at the bottom */
+.upsell-card button {
+    background-color: #6a1b9a;
+    color: white;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.upsell-card button:hover {
+    background-color: #ff4081;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .order-form {
+        grid-column: 1 / span 1;
+    }
+
+    .upsell-container {
+        grid-column: 1 / span 1;
+        grid-template-columns: 1fr;
+    }
+
+    .upsell-card {
+        width: 100%;
+    }
+
+    .upsell-card img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+

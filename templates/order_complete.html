@@ -1,10 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
+{% load static %}
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завършена поръчка</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/order.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .order-confirmation {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+        }
+        .order-confirmation h1 {
+            color: #28a745;
+            font-size: 32px;
+            text-align: center;
+        }
+        .order-confirmation p {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .order-confirmation .checkmark {
+            color: #28a745;
+            font-size: 40px;
+            text-align: center;
+        }
+        .order-summary {
+            margin-top: 30px;
+        }
+        .order-summary h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .order-summary .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .order-summary .item .item-name {
+            font-weight: bold;
+        }
+        .order-summary .item .item-quantity {
+            color: #777;
+        }
+        .order-summary .item .item-price {
+            color: #333;
+        }
+        .total {
+            font-size: 20px;
+            text-align: right;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .customer-info {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .customer-info p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 16px;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
-$END$
+    <div class="order-confirmation">
+        <div class="checkmark">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1>Благодарим ви за поръчката!</h1>
+        <p>Вашата поръчка беше успешно завършена. Очаквайте доставка в рамките на 1-2 работни дни.</p>
+
+        <div class="customer-info">
+            <h3>Получател:</h3>
+            <p><strong>Име:</strong> {{ customer_name }}</p>
+            <p><strong>Телефон:</strong> {{ customer_phone }}</p>
+            <p><strong>Адрес:</strong> {{ customer_address }}</p>
+        </div>
+
+        <div class="order-summary">
+            <h3>Детайли на поръчката</h3>
+            {% for item in cart.values %}
+                <div class="item">
+                    <div class="item-name">{{ item.name }}</div>
+                    <div class="item-quantity">x{{ item.quantity }}</div>
+                    <div class="item-price">{{ item.price }} ЛВ.</div>
+                </div>
+            {% empty %}
+                <p>Няма продукти в поръчката.</p>
+            {% endfor %}
+            <div class="total">
+                Общо: <span>{{ total_price }} ЛВ.</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Свещи от kataleyacandles.eu. Всички права запазени.</p>
+        </div>
+    </div>
 </body>
 </html>
