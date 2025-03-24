@@ -1,4 +1,6 @@
 import json
+
+from django.contrib import messages
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -83,13 +85,16 @@ def add_to_cart(request):
                     'name': candle.name,
                     'price': candle_price,
                     'quantity': 1,
+
                 }
 
             # Save the updated cart back into the cookies
             cart_json = json.dumps(cart)
 
-            # Create a response to redirect back to the same page
-            response = HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+            # Use redirect to the previous page or any other page
+            response =  redirect(request.META.get('HTTP_REFERER'))
 
             # Set the updated cart cookie with a max-age of 7 days (604800 seconds)
             response.set_cookie('cart', cart_json, max_age=604800)
@@ -97,7 +102,7 @@ def add_to_cart(request):
             return response
         else:
             # If no candle_id is provided, redirect back to the page
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return redirect('home')
 
     # If the method is not POST, redirect back to the same page
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
