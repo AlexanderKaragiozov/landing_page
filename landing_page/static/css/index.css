@@ -5,7 +5,211 @@
     box-sizing: border-box;
 }
 
+body {/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
+}
+
+/* Announcement Bar */
+.announcement {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #d9534f;
+    color: white;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+
+.announcement.hidden {
+    transform: translateY(-100%);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, #6a1b9a, #ff4081);
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+}
+
+.hero h1 {
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.hero a {
+    background-color: #ffffff;
+    color: #6a1b9a;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: background-color 0.3s, box-shadow 0.3s ease;
+}
+
+.hero a:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Featured Products Section */
+#products {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+#products h2 {
+    font-size: 2.5rem;
+    color: #6a1b9a;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+    .product-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Image Responsiveness */
+.card-img-top, .product-card img {
+    height: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+/* Review Section */
+.review {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.review img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+}
+
+/* Benefits Section */
+#benefits {
+    background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+    padding: 80px 0;
+}
+
+.benefit-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Package Image Responsiveness */
+.package-img {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.package-img img {
+    max-width: 100%;
+    height: auto;
+    width: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .package-img img {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
     color: #212529;

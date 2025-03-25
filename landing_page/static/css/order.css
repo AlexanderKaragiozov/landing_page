@@ -112,8 +112,8 @@ body {
 
 /* Smaller images */
 .upsell-card img {
-    width: 200px;
-    height: 200px;
+    width: 130px;
+    height: 230px;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 5px;

@@ -9,6 +9,8 @@ from landing_page import models
 class CandleAdmin(admin.ModelAdmin):
     pass
 
-
+@admin.register(models.Upsells)
+class UpsellAdmin(admin.ModelAdmin):
+    pass
 def site(request):
     return None

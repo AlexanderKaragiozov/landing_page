@@ -1,5 +1,6 @@
 landing_page/spreadsheet.py
 .idea
 db.sqlite3
-
 .idea/Candles With Landing Page.iml
+staticfiles
+Candles_With_Landing_Page/settings.py

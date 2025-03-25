@@ -23,8 +23,8 @@ def get_cart_length(request):
         return 0
 def home(request):
 
-    candles = Candle.objects.all()[:4]
-
+    candles = Candle.objects.all()
+    upsells = Upsells.objects.all()
     cart = {}
     if 'cart' in request.COOKIES:
         cart = json.loads(request.COOKIES['cart'])
@@ -34,11 +34,12 @@ def home(request):
         'candles': candles,
         'cart': cart,
         'CART_COUNT': get_cart_length(request),
+        'upsells': upsells,
     })
 
 
 def order(request):
-    upsells = Candle.objects.all()[4:6]
+    upsells = Upsells.objects.all()
     cart = {}
     if 'cart' in request.COOKIES:
         cart = json.loads(request.COOKIES['cart'])

@@ -189,7 +189,7 @@ src="https://www.facebook.com/tr?id=1655768065310220&ev=PageView&noscript=1"
             <div class="col-md-4 mb-4">
                 <div class="review">
                     <img src="{%  static 'images/Miro.jpg' %}" class="rounded-circle mb-3" width="80" height="80" alt="Миро">
-                    <p>"Страхотен професионалисти.Коректни! Препоръчвам"</p>
+                    <p>"Страхотни професионалисти.Коректни! Препоръчвам"</p>
                     <h5>Миро</h5>
                 </div>
             </div>
@@ -231,13 +231,13 @@ src="https://www.facebook.com/tr?id=1655768065310220&ev=PageView&noscript=1"
             </div>
         </div>
     </section>
-    <!-- Modal for Zooming in on Candle 1 -->
-<div class="modal fade" id="imageModal1" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+{% for candle in candles %}
+<!-- Modal for Zooming in on Candle {{ forloop.counter }} -->
+<div class="modal fade" id="imageModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body text-center">
-                <!-- Use a larger version of the image but control size -->
-                <img src="{{ candle1.image.url }}" class="img-fluid" style="max-width: 80%; height: auto;" alt="Свещ 1">
+                <img src="{{ candle.image.url }}" class="img-fluid" style="max-width: 80%; height: auto;" alt="Свещ {{ forloop.counter }}">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
@@ -245,48 +245,7 @@ src="https://www.facebook.com/tr?id=1655768065310220&ev=PageView&noscript=1"
         </div>
     </div>
 </div>
-
-<!-- Modal for Zooming in on Candle 2 -->
-<div class="modal fade" id="imageModal2" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <img src="{{ candle2.image.url }}" class="img-fluid" style="max-width: 80%; height: auto;" alt="Свещ 2">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Zooming in on Candle 3 -->
-<div class="modal fade" id="imageModal3" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <img src="{{ candle3.image.url }}" class="img-fluid" style="max-width: 80%; height: auto;" alt="Свещ 3">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Zooming in on Candle 4 -->
-<div class="modal fade" id="imageModal4" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <img src="{{ candle4.image.url }}" class="img-fluid" style="max-width: 80%; height: auto;" alt="Свещ 4">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
-            </div>
-        </div>
-    </div>
-</div>
+{% endfor %}
     <!-- Footer -->
     <footer class="py-4 bg-dark text-white text-center w-100">
         <p>&copy; 2025 Свещи от kataleyacandles.eu. Всички права запазени.</p>
