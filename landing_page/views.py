@@ -176,6 +176,7 @@ def order_complete(request):
         ordered_items = ''
         for item in cart:
             ordered_items += f"{cart[item]['name']} × {cart[item]['quantity']}\n"
+        ordered_items += f"Общо: {total_price}"
         SPREADSHEET_ROW.append(ordered_items)
         SPREADSHEET_ROW.append("НЕ")
         SPREADSHEET_ROW.append('НЕ')
