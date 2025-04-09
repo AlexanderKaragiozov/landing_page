@@ -1,4 +1,5 @@
 import json
+from unicodedata import decimal
 
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
@@ -28,13 +29,21 @@ def home(request):
     cart = {}
     if 'cart' in request.COOKIES:
         cart = json.loads(request.COOKIES['cart'])
+    total = 0
+    for item in cart:
 
+
+
+        quantity = int(cart[item]['quantity'])
+        price = Decimal(cart[item]['price'])  # Ensure it's converted to a Decimal
+        total += quantity * price
     return render(request, 'index.html', {
 
         'candles': candles,
         'cart': cart,
         'CART_COUNT': get_cart_length(request),
         'upsells': upsells,
+        'total': total,
     })
 
 
@@ -43,10 +52,16 @@ def order(request):
     cart = {}
     if 'cart' in request.COOKIES:
         cart = json.loads(request.COOKIES['cart'])
+        print(cart)
     total = 0
     for item in cart:
-        total += cart[item]['quantity'] * cart[item]['price']
 
+
+
+        quantity = int(cart[item]['quantity'])
+        price = Decimal(cart[item]['price'])  # Ensure it's converted to a Decimal
+        total += quantity * price
+    print('total', total)
 
     return render(request, 'place_order.html',{
         'upsells': upsells,
@@ -62,80 +77,72 @@ from .models import Candle
 
 def add_to_cart(request):
     if request.method == 'POST':
-        # Get the candle_id from the POST request
         candle_id = request.POST.get('candle_id')
+        candle_name = request.POST.get('candle_name')
+        referer = request.META.get('HTTP_REFERER', '')
 
         if candle_id:
-            # Fetch the candle object or return 404 if not found
-            candle = get_object_or_404(Candle, id=candle_id)
+            if '/order' in referer:
+                candle = get_object_or_404(Upsells, id=candle_id)
+                item_type = 'upsell'
+            else:
+                candle = get_object_or_404(Candle, id=candle_id)
+                item_type = 'candle'
 
-            # Convert the price from Decimal to float before adding to the cart
             candle_price = float(candle.price)
 
-            # Get the cart from the cookies or initialize it as an empty dictionary
             cart = {}
             if 'cart' in request.COOKIES:
                 cart = json.loads(request.COOKIES['cart'])
 
-            # Update the quantity of the item or add a new item to the cart
-            if candle_id in cart:
-                cart[candle_id]['quantity'] += 1
+            cart_key = f"{item_type}_{candle_id}"
+
+            # Update the quantity or add the item to the cart
+            if cart_key in cart:
+                cart[cart_key]['quantity'] += 1
             else:
-                cart[candle_id] = {
+                cart[cart_key] = {
                     'id': candle_id,
+                    'type': item_type,
                     'name': candle.name,
                     'price': candle_price,
                     'quantity': 1,
-
                 }
 
-            # Save the updated cart back into the cookies
             cart_json = json.dumps(cart)
-
-
-
-            # Use redirect to the previous page or any other page
-            response =  redirect(request.META.get('HTTP_REFERER'))
-
-            # Set the updated cart cookie with a max-age of 7 days (604800 seconds)
-            response.set_cookie('cart', cart_json, max_age=604800)
+            messages.success(request, f"Добавихте {candle.name} в количката", extra_tags='show_cart_modal')
+            response = redirect(request.META.get('HTTP_REFERER'))
+            response.set_cookie('cart', cart_json, max_age=604800)  # Save updated cart
 
             return response
         else:
-            # If no candle_id is provided, redirect back to the page
             return redirect('home')
 
-    # If the method is not POST, redirect back to the same page
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 def remove_from_cart(request):
-    global CART_COUNT
     if request.method == 'POST':
-        # Get the item_id from the request body
-        data = json.loads(request.body)
-        item_id = data.get('item_id')
-        print(item_id)
-        # Get the cart from the cookies
+        item_id = request.POST.get('item_id')
+
+
         cart = {}
         if 'cart' in request.COOKIES:
             cart = json.loads(request.COOKIES['cart'])
 
-        # Check if the item_id exists in the cart
+        # If the item exists in the cart, remove it
         if item_id in cart:
-            # Remove the item from the cart
             del cart[item_id]
 
-            # Save the updated cart back to the cookies
             cart_json = json.dumps(cart)
 
-            response = JsonResponse({'success': True})
-            response.set_cookie('cart', cart_json, max_age=604800)  # Set the updated cart in cookies
+            response = redirect(request.META.get('HTTP_REFERER', '/'))
+            response.set_cookie('cart', cart_json, max_age=604800)  # Save updated cart
+
             return response
         else:
-            # If the item isn't found in the cart
-            return JsonResponse({'success': False, 'message': 'Item not found'})
+            return JsonResponse({'success': False, 'message': 'Item not found in cart'})
 
-    # If the request method isn't POST, return an error
     return JsonResponse({'success': False, 'message': 'Invalid request method'})
+
 def get_cart_items(request):
     # Retrieve the cart from cookies, or initialize an empty dictionary if not present
     cart = {}
@@ -148,7 +155,7 @@ def get_cart_items(request):
         price = item.get('price')
         quantity = item.get('quantity')
         # Do whatever you need with these values
-        print(f"Item: {name}, Price: {price}, Quantity: {quantity}")
+
 
     # You can return the cart or any necessary information
     return cart

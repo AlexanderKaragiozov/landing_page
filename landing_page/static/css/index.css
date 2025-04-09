@@ -471,14 +471,14 @@ footer p {
     position: fixed;
     bottom: 20px;  /* Pushes button to bottom */
     right: 20px;   /* Pushes button to right */
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #007bff;
+    background-color: #000000;
     color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     border: none;
@@ -488,7 +488,7 @@ footer p {
 }
 
 #cart-btn:hover {
-    background-color: #0056b3;
+    background-color: #4380c0;
 }
 
 #cart-count {
@@ -588,9 +588,9 @@ footer p {
 }
 
 .package-img img {
-    max-width: 100%;  /* Ensures the images are responsive */
+    /*max-width: 100%;  !* Ensures the images are responsive *!*/
     height: auto;  /* Maintains aspect ratio */
-    width: 150px;  /* Sets a consistent width for all images */
+    width: 250px;  /* Sets a consistent width for all images */
     border-radius: 10px;  /* Adds rounded corners for a soft look */
     object-fit: cover; /* Ensures the image looks good */
 }
@@ -599,7 +599,7 @@ footer p {
 @media (max-width: 768px) {
     .package-img img {
         width: 100%; /* Makes each image take up full width on smaller screens */
-        max-width: 300px; /* Maximum width */
+
         margin-bottom: 15px;  /* Adds space below each image */
     }
 }
